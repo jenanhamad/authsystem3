@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+{% block title %}استبيان{% endblock %}
+{% block content %}
+    <div class="ui center aligned basic very padded segment">
+        <h1 class="ui header">انشئ استبيان جديد</h1>
+        <div class="ui container left aligned">
+            <form class="ui form {% if form.errors %}error{% endif %}"
+                  method="post"
+                  novalidate>
+                {% csrf_token %}
+                
+                <div class="field {% if form.title.errors %}error{% endif %}">{{ form.title }}</div>
+
+                <div class="grouped fields">
+                    <label>فضلا اختر مكان الاجتماع</label>
+                    <div class="field {% if form.q1option1.errors %}error{% endif %}">{{ form.q1option1 }}</div>
+                    <div class="field {% if form.q1option2.errors %}error{% endif %}">{{ form.q1option2 }}</div>
+                </div>
+                <div class="grouped fields">
+                    <label>فضلا اختر وقت الاجتماع</label>
+                    <div class="field {% if form.q2option1.errors %}error{% endif %}">{{ form.q2option1 }}</div>
+                    <div class="field {% if form.q2option2.errors %}error{% endif %}">{{ form.q2option2 }}</div>
+                </div>                
+                <div class="grouped fields">
+                    <label>فضلا اختر تاريخ الاجتماع</label>
+                    <div class="field {% if form.q3option1.errors %}error{% endif %}">{{ form.q3option1 }}</div>
+                    <div class="field {% if form.q3option2.errors %}error{% endif %}">{{ form.q3option2 }}</div>
+                </div>                
+                <div class="grouped fields">
+                    <label> هل ستحضر الاجتماع</label>
+                    <div class="field {% if form.q4option1.errors %}error{% endif %}">{{ form.q4option1 }}</div>
+                    <div class="field {% if form.q4option2.errors %}error{% endif %}">{{ form.q4option2 }}</div>
+                </div>
+
+
+                <button type="submit" class="ui primary button">انشاء</button>
+                <a href="{% url 'survey:survey-list' %}">
+                    <div class="ui button">الغاء</div>
+                </a>
+                <div class="ui message error">
+                    <div class="header">We had some issues</div>
+                    <ul class="list">
+                        {% for field in form %}
+                            {% for error in field.errors %}<li>{{ field.label_tag }} {{ error }}</li>{% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% block title %}report - Surveys{% endblock %}
+
+{% block content %}
+
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>الاجتماع</th>
+                <th> مكان الاجتماع </th>
+                <th> وقت الاجتماع </th>
+                <th>تاريخ الاجتماع  </th>
+                <th> ستحضر الاجتماع </th>
+                <th>الضيف</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ survey.title }}</td>
+                {% for question in questions %}
+                    {% for option in question.option_set.all %}
+                    <td>
+                        {{option.text}}
+                    </td>
+                {% endfor %} 
+                {% endfor %}
+                <td>{{sub.voter}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+</div>
+{% endblock %}
