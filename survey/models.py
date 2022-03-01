@@ -34,7 +34,7 @@ class Answer(models.Model):
 
 
 class Note(models.Model):
-    note = models.CharField(max_length=128)
+    note = models.CharField(max_length=255)
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
 
 
