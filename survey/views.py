@@ -8,7 +8,7 @@ from django.forms.formsets import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import Option, Survey, Question, Answer, Submission
-from .forms import SurveyForm, OptionForm, AnswerForm, BaseAnswerFormSet,QuestionForm, NoteForm
+from .forms import SurveyForm, OptionForm, AnswerForm, BaseAnswerFormSet,QuestionForm
 
 from django.conf import settings
 User = settings.AUTH_USER_MODEL
@@ -60,6 +60,7 @@ def detail(request, pk):
             "public_url": public_url,
             "questions": questions,
             "num_submissions": num_submissions,
+            "submissions" : survey.submission_set.filter(is_complete=True)
         },
     )
 
@@ -234,25 +235,28 @@ def submit(request, survey_pk, sub_pk):
     questions = survey.question_set.all()
     options = [q.option_set.all() for q in questions]
     form_kwargs = {"empty_permitted": False, "options": options}
-    AnswerFormSet = formset_factory(AnswerForm, extra=len(questions), formset=BaseAnswerFormSet)
+    answer_form_set = formset_factory(AnswerForm, extra=len(questions), formset=BaseAnswerFormSet)
  
     if request.method == "POST":
-        formset = AnswerFormSet(request.POST, form_kwargs=form_kwargs)
+        formset = answer_form_set(request.POST, form_kwargs=form_kwargs)
+        note = request.POST.get("note", "")
+
+
         if formset.is_valid():
             with transaction.atomic():
                 for form in formset:
                     Answer.objects.create(
                         option_id=form.cleaned_data["option"], submission_id=sub_pk,
                     )
+                sub.note = note
                 sub.is_complete = True
                 sub.save()
         
             return redirect("survey:survey-thanks", pk=survey_pk)
 
     else:
-        formset = AnswerFormSet(form_kwargs=form_kwargs)
+        formset = answer_form_set(form_kwargs=form_kwargs)
 
-    # print(formset)
     question_forms = zip(questions, formset)
     return render(
         request,
