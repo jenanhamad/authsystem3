@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Submission, Survey, Option,Question,Note
+from .models import Submission, Survey, Option,Question
 
 
 class SurveyForm(forms.ModelForm):
@@ -52,8 +52,3 @@ class BaseAnswerFormSet(forms.BaseFormSet):
         kwargs = super().get_form_kwargs(index)
         kwargs["options"] = kwargs["options"][index]
         return kwargs
-
-class NoteForm(forms.ModelForm):
-    class Meta:
-        model = Note
-        fields = ["note"]
