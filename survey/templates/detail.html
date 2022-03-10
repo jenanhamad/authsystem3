@@ -23,26 +23,6 @@
         {% endfor %}
 
 
-          <h4 class="ui header">
-                    الملاحظات
-          </h4>
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>Note</th>
-            </tr>
-            </thead>
-            <tbody>
 
-            {% for submission in submissions %}
-                <tr>
-                    <td data-label="id">{{  submission.id }}</td>
-                    <td data-label="note">{{  submission.note }}</td>
-                </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
     </div>
 {% endblock %}

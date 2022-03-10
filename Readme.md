@@ -1,4 +1,4 @@
-# جمعتنا تطبيق لمشاركة جمعاتكم
+# جمعi تطبيق لمشاركة جمعاتكم
 
 
 ## طريقة التثبيت 
@@ -12,9 +12,9 @@ python -V
 Python 3.9.4
 ```
 
-``shell
+```shell
 pip -V
-``
+```
 يفترض انه يطلع السطر التالي مع زيادات و اختلاف في النسخة
 ```
 pip 21.3 
@@ -26,14 +26,8 @@ pip 21.3
 ```shell
 pip install --user pipx
 python -m pipx ensurepath
-```
+````
 ```shell
-function refresh-path {
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") +
-                ";" +
-                [System.Environment]::GetEnvironmentVariable("Path","User")
-}
-refresh-path
 
 pipx install pipenv
 ```

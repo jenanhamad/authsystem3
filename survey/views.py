@@ -38,9 +38,6 @@ def detail(request, pk):
     survey = Survey.objects.prefetch_related("question_set__option_set").get(pk=pk,is_active=True)
     questions = survey.question_set.all()
 
-    # Calculate the results.
-    # This is a naive implementation and it could be optimised to hit the database less.
-    # See here for more info on how you might improve this code: https://docs.djangoproject.com/en/3.1/topics/db/aggregation/
     for question in questions:
         option_pks = question.option_set.values_list("pk", flat=True)
         total_answers = Answer.objects.filter(option_id__in=option_pks).count()
@@ -132,15 +129,21 @@ def delete(request, pk):
 
 @login_required
 def report(request,pk):
-    survey = Survey.objects.prefetch_related("question_set__option_set").get(pk=pk)
+    survey = Survey.objects.prefetch_related("question_set__option_set").get(pk=pk,is_active=True)
     questions = survey.question_set.all()
     sub = survey.submission_set.get()
-    for question in questions:
-        for option in question.option_set.all():
-            answers = Answer.objects.filter(option=option)
-            option.num = answers 
 
-    return render(request, "report.html", {"survey": survey , "questions": questions,"sub":sub},)
+    for question in questions:
+        option_pks = question.option_set.values_list("pk", flat=True)
+        answers = Answer.objects.filter(option_id__in=option_pks).get
+        for option in question.option_set.all():
+            option.num = answers
+
+    return render(request, "report.html",
+                  {"survey": survey ,
+                   "questions": questions,
+                   "submissions" : survey.submission_set.filter(is_complete=True),
+                   "sub": sub,})
 
 @login_required
 @allowed_users(allowed_roles=['host'])
