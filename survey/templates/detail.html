@@ -13,10 +13,20 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
           <link href="{% static 'css/btn.css' %}" rel="stylesheet">
 
+<style>
+       body h1, h2,h3,h4{
+		font-family: "Cairo", sans-serif;
+        color: rgb(95, 91, 91);
+        }
+       h5{
+           		font-family: "Cairo", sans-serif;
 
+           color: #0b0b0b;
+       }
+</style>
     <!-- Preloader -->
 	<div class="spinner-wrapper">
         <div class="spinner">
@@ -45,26 +55,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                <hr>
     <div class="ui center aligned basic very padded segment">
-        <h1 class="ui header">{{ survey.title }}</h1>
+        <h1 >{{ survey.title }}</h1>
         <h3 >عدد المصوتين {{ num_submissions }} </h3>
         <h3 >رابط المشاركة: <a href="{{ public_url }}">{{ public_url }}</a></h3>
         <h1>النتائج</h1>
+    <hr>
         {% for question in questions %}
             <div class="ui basic padded segment right aligned">
-                <h4 class="ui header">
+                <h4 >
                     {{ question.prompt }}
                 </h4>
-                <ul>
+
                     {% for option in question.option_set.all %}
                             <br>
-                            {{ option.text }}: {{ option.percent|floatformat }}%
-
+                        <h5>
+                           {{ option.text }}  :   {{ option.percent|floatformat }} % </h5>
                     {% endfor %}
-                </ul>
             </div>
 
         {% endfor %}
+        <hr>
+
         <a href="{% url 'survey:survey-list' %}">
             <div class="btn-meet-lg">رجوع</div>
         </a>

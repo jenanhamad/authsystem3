@@ -16,8 +16,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
 
+    <style>
+        body h1, h2,h3,h4{
+		font-family: "Cairo", sans-serif;
+        color: rgb(95, 91, 91);
+        }
+    </style>
 </head>
 
     <body>
@@ -25,9 +31,12 @@
 
 
 <div class="ui center aligned basic very padded segment">
-    <h1 class="ui header">
-        <b>{{ survey.title }}s</b>
-        شكرا لمشاركتك في
+    <h1 > شكرا لمشاركتك في
+        <b style="color: #0b0b0b">{{ survey.title }}</b>
     </h1>
+    <br><br>
+        <a href="{% url 'guest' %}">
+            <div class="btn-meet-lg">رجوع</div>
+        </a>
 </div> </body>
 {% endblock %}

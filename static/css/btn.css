@@ -6,8 +6,8 @@
 	border-radius: 2rem;
 	background-color: #c9b2a4;
 	color: #fff;
-	font: 700 0.875rem/0 "Open Sans", sans-serif;
-
+	font: 900 0.875rem/0 "Cairo", sans-serif;
+	font-family: "Cairo", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
 }

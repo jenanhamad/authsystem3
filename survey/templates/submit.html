@@ -27,10 +27,18 @@
 	padding-top:1rem;
 	padding-bottom: 1rem;
 }
+       body h1, h2,h3,h4{
+		font-family: "Cairo", sans-serif;
+        color: rgb(95, 91, 91);
+        }
+       h5{
+           		font-family: "Cairo", sans-serif;
 
+           color: #0b0b0b;
+       }
     </style>
     <div class="ui center aligned basic very padded segment">
-        <h1 class="ui header dividing">اجوبتك لــ {{ survey.title }}</h1>
+        <h1 >اجوبتك لــ {{ survey.title }}</h1>
         <form method="post" novalidate>
             {% csrf_token %}
             {{ formset.management_form }}
@@ -39,7 +47,7 @@
                 {% for question, form in question_forms %}
 
                     <div class="ui form {% if form.errors %}error{% endif %}">
-                        <h4 class="ui header">
+                        <h4 >
                             {{ question.prompt }}
                         </h4>
                         {% for field in form %}
@@ -65,7 +73,7 @@
 
 
                 <div class="field">
-                    <label>ملاحظه</label>
+                    <h4>ملاحظه</h4>
                     <textarea name="note" rows="2" ></textarea>
                 </div>
             </div>

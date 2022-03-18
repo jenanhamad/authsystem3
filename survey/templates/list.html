@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
 <style>
        body h1, h2{
+		font-family: "Cairo", sans-serif;
 
 color: rgb(95, 91, 91);
         }
@@ -49,10 +50,10 @@ color: rgb(95, 91, 91);
 <br>
 <br>
 <div class="ui center aligned basic very padded segment">
-    <h1> مرحبا {{ request.user.username }} </h1>
+    <h1 class="font-a" > مرحبا {{ request.user.username }} </h1>
     <br>
     <a class="btn-meet-lg" href="{% url 'survey:survey-create' %}">
-        انشئ استبيان جديد
+        انشئ اجتماع جديد
     </a>
 </div>
 <div class="ui center aligned basic very padded segment">
