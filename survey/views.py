@@ -9,8 +9,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import Option, Survey, Question, Answer, Submission
 from .forms import SurveyForm, OptionForm, AnswerForm, BaseAnswerFormSet,QuestionForm
-
+from django.db.models import Q
 from django.conf import settings
+
+
 User = settings.AUTH_USER_MODEL
 def index(request):
     return render(request, 'list.html')
@@ -128,22 +130,28 @@ def delete(request, pk):
     return redirect("survey:survey-list")
 
 @login_required
-def report(request,pk):
-    survey = Survey.objects.prefetch_related("question_set__option_set").get(pk=pk,is_active=True)
-    questions = survey.question_set.all()
-    sub = survey.submission_set.get()
+def report(request, pk):
+    survey = Survey.objects.prefetch_related("question_set__option_set").get(pk=pk)
+    sub = survey.submission_set.filter(survey=pk)
+    all = {}
+    users = []
+    if sub.values('voter').distinct().count() > 1:
+        for i in range(0, sub.values('voter').distinct().count()):
+            for d in sub.filter(Q(voter=list(sub.values('voter').distinct())[i]['voter'])):
+                for get in Answer.objects.filter(submission=d):
+                    for am in Option.objects.filter(id=get.option_id):
+                        all[am.question_id] = str(am.text)
+            users.append(User.objects.get(id=list(sub.values('voter').distinct())[i]['voter']))
+    elif sub.values('voter').distinct().count() == 0:
+        users = None
+    else:
+        for d in sub.filter(Q(voter=list(sub.values('voter').distinct())[0]['voter'])):
+            for get in Answer.objects.filter(submission=d):
+                for am in Option.objects.filter(id=get.option_id):
+                    all[am.question_id] = str(am.text)
+        users.append(User.objects.get(id=list(sub.values('voter').distinct())[0]['voter']))
 
-    for question in questions:
-        option_pks = question.option_set.values_list("pk", flat=True)
-        answers = Answer.objects.filter(option_id__in=option_pks).get
-        for option in question.option_set.all():
-            option.num = answers
-
-    return render(request, "report.html",
-                  {"survey": survey ,
-                   "questions": questions,
-                   "submissions" : survey.submission_set.filter(is_complete=True),
-                   "sub": sub,})
+    return render(request, "report.html", {"all": all, "users": users},)
 
 @login_required
 @allowed_users(allowed_roles=['host'])

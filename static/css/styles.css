@@ -1,8 +1,4 @@
-/* Template: Tivo - SaaS App HTML Landing Page Template
-   Author: Inovatik
-   Created: Sep 2019
-   Description: Master CSS file
-*/
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;900&display=swap');
 
 /*****************************************
 Table Of Contents:
@@ -47,9 +43,9 @@ html {
 }
 
 body, p {
-	color: #555; 
-	font: 400 1rem/1.625rem "Open Sans", sans-serif;;
-	font-family: 'Droid Arabic Kufi', serif;
+	color: #555;
+	font: 400 1rem/1.625rem 'Cairo', sans-serif;;
+	font-family: 'Cairo', sans-serif;
 	
 
 }
@@ -58,41 +54,41 @@ body, p {
 }
 
 .p-small {
-	font: 400 0.875rem/1.5rem "Open Sans", sans-serif;
+	font: 400 0.875rem/1.5rem 'Cairo', sans-serif;
 }
 
 h1 {
-	color: #333;
+	color: rgb(95, 91, 91);
 	letter-spacing: -0.2px;
 }
 
 h2 {
-	color: #333;
-	font: 700 2rem/2.625rem "Open Sans", sans-serif;
+	color: rgb(95, 91, 91);
+	font: 700 2rem/2.625rem 'Cairo', sans-serif;
 	letter-spacing: -0.2px;
 }
 
 h3 {
-	color: #333;
+	color: rgb(95, 91, 91);
 	font: 700 1.625rem/2.125rem "Open Sans", sans-serif;
 	letter-spacing: -0.2px;
 }
 
 h4 {
-	color: #333;
+	color: rgb(95, 91, 91);
 	font: 700 1.375rem/1.75rem "Open Sans", sans-serif;
 	letter-spacing: -0.1px;
 }
 
 h5 {
-	color: #333;
+	color: rgb(95, 91, 91);
 	font: 700 1.125rem/1.5rem "Open Sans", sans-serif;
 	letter-spacing: -0.1px;
 }
 
 h6 {
-	color: #333;
-	font: 700 1rem/1.375rem "Open Sans", sans-serif;
+	color: rgb(95, 91, 91);
+	font: 700 1rem/1.375rem 'Cairo', sans-serif;
 	letter-spacing: -0.1px;
 }
 
@@ -992,6 +988,7 @@ input[type='checkbox'] {
 	padding-left: 0;
 }
 
+
 .lightbox-basic .image-container {
 	max-width: 33.75rem;
 	margin-right: auto;
@@ -1232,7 +1229,7 @@ input[type='checkbox'] {
 .cards-2 .card .card-title {
 	margin-bottom: 0.5rem;
 	color: #5f4dee;
-	font: 700 1.125rem/1.5rem "Open Sans", sans-serif;
+	font: 700 1.125rem/1.5rem 'Cairo', sans-serif;
 }
 
 .cards-2 .card .price .currency {
@@ -1245,7 +1242,7 @@ input[type='checkbox'] {
 
 .cards-2 .card .price .value {
 	color: #434c54;
-	font: 700 3.25rem/3.5rem "Open Sans", sans-serif;
+	font: 700 3.25rem/3.5rem 'Cairo', sans-serif;
 	text-align: center;
 }
 
@@ -1601,20 +1598,21 @@ a:hover.back-to-top {
 }
 
 .ex-2-header p {
-	max-width: 24rem;
+	max-width: 32rem;
 	margin-right: auto;
 	margin-bottom: 2.5rem;
 	margin-left: auto;
 }
 
 .ex-2-header .form-container {
-	max-width: 26rem;
+	max-width: 25rem;
 	margin-right: auto;
 	margin-left: auto;
 	padding: 2.25rem 1.25rem 1.25rem 1.25rem;
 	border-radius: 0.5rem;
-	background-color: #f3f7fd;
+	background-color: #fbeee7;
 }
+
 
 .ex-2-header .checkbox {
 	text-align: right;

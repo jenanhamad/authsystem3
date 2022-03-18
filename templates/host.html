@@ -17,6 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+        <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
 
     <!-- Preloader -->
 	<div class="spinner-wrapper">
@@ -46,14 +48,19 @@
 
 <body>
   <header id="header" class="ex-2-header">
+<br> <br>
 
     <h1 class= "user_label" >  مرحبا {{ user.username }} !
     <br>
+        <br>
+
     لقد قمت بتسجيل دخولك كمضيف</h1>
+<br>
+<br>
 
 
-<a href="{% url 'profile' %}">الصفجة الشخصيه</a>
-<a href="{% url 'survey:survey-list' %}">صفحة الاستبيان</a>
+<a class="btn-meet-lg" href="{% url 'profile' %}">الصفحة الشخصيه</a>
+<a class="btn-meet-lg" href="{% url 'survey:survey-list' %}">صفحة الاجتماعات</a>
 </header>
 <script src="{% static 'js/jquery.min.js' %} "></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
 <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->

@@ -5,3 +5,5 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     is_host= models.BooleanField('Is host', default=False)
     is_guest = models.BooleanField('Is guest', default=False)
+
+

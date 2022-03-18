@@ -1,11 +1,33 @@
 {% extends "_base.html" %}
-{% block title %}Thanks - Surveys{% endblock %}
+{% load static %}
+
+{% block title %}شكرا{% endblock %}
 
 {% block content %}
+    <head>
+
+
+ <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+
+</head>
+
+    <body>
+
+
+
 <div class="ui center aligned basic very padded segment">
     <h1 class="ui header">
-        {{ survey.title }}
- شكرا لمشاركتك في
+        <b>{{ survey.title }}s</b>
+        شكرا لمشاركتك في
     </h1>
-</div>
+</div> </body>
 {% endblock %}

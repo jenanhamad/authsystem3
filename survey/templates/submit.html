@@ -1,23 +1,40 @@
 {% extends "_base.html" %}
+{% load static %}
 {% block title %}Submit - Surveys{% endblock %}
-
 {% block content %}
-    <style>
-        form .field ul {
-            list-style: none;
-            padding: 0 1rem;
-        }
+    <html lang="en" dir="rtl">
 
-        form .field li {
-            margin-bottom: 0.3rem;
-        }
+<head>
+
+
+ <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+      <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+
+
+</head>
+
+    <style>
+
+.form {
+	padding-top:1rem;
+	padding-bottom: 1rem;
+}
+
     </style>
     <div class="ui center aligned basic very padded segment">
         <h1 class="ui header dividing">اجوبتك لــ {{ survey.title }}</h1>
         <form method="post" novalidate>
             {% csrf_token %}
             {{ formset.management_form }}
-            <div class="ui form basic padded segment left aligned">
+            <div class="ui form basic padded segment right aligned">
 
                 {% for question, form in question_forms %}
 
@@ -30,11 +47,6 @@
                                 {{ field }}
                             </div>
                         {% endfor %}
-
-
-
-
-
                         <div class="ui message error">
                             <div class="header">We had some issues</div>
                             <ul class="list">
@@ -53,15 +65,15 @@
 
 
                 <div class="field">
-                    <label>Note</label>
-                    <textarea name="note" rows="2"></textarea>
+                    <label>ملاحظه</label>
+                    <textarea name="note" rows="2" ></textarea>
                 </div>
             </div>
 
 
 
 
-            <button type="submit" class="ui primary button">ارسال</button>
+            <button type="submit" class="btn-meet-lg">ارسال</button>
         </form>
 
     </div>

@@ -1,17 +1,49 @@
 {% extends "_base.html" %}
+{% load static %}
 {% block title %}Start - Surveys{% endblock %}
-
 {% block content %}
+    <html lang="en" dir="rtl">
+
+<head>
+
+
+ <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+      <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+
+
+   <style>
+       body b{
+
+color: rgb(95, 91, 91);
+           font-size: 25px;
+            font: 400 2rem/13.625rem 'Cairo', sans-serif;
+	text-align: center;
+        }
+</style>
+</head>
+
+
 <div class="ui center aligned basic very padded segment">
     <h1 class="ui header">
         <div class="sub header">
 
-            <b>{{ survey.title }}</b>انت مدعو لــ 
+           <b>
+               انت مدعو لــ{{ survey.title }}
+           </b>
         </div>
     </h1>
     <form method="post" action="{% url 'survey:survey-start' survey.pk %}" style="display: inline-block;">
         {% csrf_token %}
-        <button type="submit" class="ui primary button">ابدا التصويت
+        <button type="submit" class="btn-meet-lg">ابدأ التصويت</button>
+
     </form>
 </div>
 {% endblock %}

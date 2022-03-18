@@ -1,4 +1,30 @@
 {% load static %}
+<head>
+
+    <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+          <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+    <style>
+        body p{
+
+          font-size: 25px;
+            font: 400 2rem/23.625rem 'Cairo', sans-serif;
+	text-align: center;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
 {% if request.user.is_authenticated %}
     <div style='margin-top:30px;'>
         <form method='POST'>{% csrf_token %}
@@ -6,5 +32,8 @@
         </form>
     </div>
 {% else %}
-<p>You're not logged in. Would you like to <a href='/'>login</a>?</p>
+
+  <p> انت لم تسجل الدخول, هل ترغب في <a href="{% url 'login_view' %}">تسجيل الدخول </a></p>
+
 {% endif %}
+</body>

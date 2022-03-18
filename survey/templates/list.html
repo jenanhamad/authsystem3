@@ -1,25 +1,73 @@
 {% extends "_base.html" %}
-{% block title %}List - Surveys{% endblock %}
+{% load static %}
+{% block title %}قائمة الاجتماعات{% endblock %}
 
 {% block content %}
+    <html lang="en" dir="rtl">
+  <head>
+
+    <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+      <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+<style>
+       body h1, h2{
+
+color: rgb(95, 91, 91);
+        }
+</style>
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+       <div class="container">
+          <!-- Image Logo -->
+          <a class="navbar-brand logo-image" href="{% url 'index' %}">
+          <img src= {% static 'images/logo.png' %} alt="alternative"></a>
+          <span class="nav-item">
+            <a class="btn-outline-sm" href="{% url 'logout' %}">سجل خروجك</a>
+          </span>
+       </div>
+       </div>
+       <!-- end of container -->
+    </nav>
+</head>
+
+    <body>
+<br>
+<br>
 <div class="ui center aligned basic very padded segment">
-    <h1 class="ui header">مرحبا {{ request.user.username }}</h1>
-    <a href="{% url 'survey:survey-create' %}">
-        <div class="ui primary button">انشئ استبيان جديد</div>
+    <h1> مرحبا {{ request.user.username }} </h1>
+    <br>
+    <a class="btn-meet-lg" href="{% url 'survey:survey-create' %}">
+        انشئ استبيان جديد
     </a>
 </div>
 <div class="ui center aligned basic very padded segment">
     {% if surveys %}
-    <h2 class="ui header">الاستبيانات السابقة</h2>
-    <table class="ui celled table">
-        <thead>
+    <h2 >الاجتماعات السابقة</h2>
+    <table class="ui celled table" style="width: 100%" >
+        <thead class="center aligned">
             <tr>
-                <th>Title</th>
-                <th>Created At</th>
-                <th>Actions</th>
+                <th>العنوان</th>
+                <th>تاريخ الانشاء</th>
+                <th>الخيارات</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="center aligned">
+
             {% for survey in surveys %}
             <tr>
                 <td>{{ survey.title }}</td>
@@ -27,20 +75,22 @@
                 <td>
                     {% if survey.is_active %}
                     <a href="{% url 'survey:survey-detail' survey.pk %}">
-                        <div class="ui button">view</div>
+                        <div class="ui button">عرض</div>
                     </a>
                     {% else %}
                     <a href="{% url 'survey:survey-edit' survey.pk %}">
-                        <div class="ui button">edit</div>
+                        <div class="ui button">تحرير</div>
                     </a>
                     {% endif %}
                     <form method="post" action="{% url 'survey:survey-delete' survey.pk %}" style="display: inline-block;">
                         {% csrf_token %}
-                        <button class=" ui button">delete</button>
+                        <button class=" ui button">حذف</button>
                     </form>
-                    <form method="post" action="{% url 'survey:survey-report' survey.pk %}" style="display: inline-block;">
+                    <form method="post" action="{% url 'survey:survey-report' survey.pk %}" style="display: inline-block; " >
                         {% csrf_token %}
-                        <button class=" ui button">report</button>
+
+
+                        <button class=" ui button">تقرير</button>
                     </form>
 
                 </td>
@@ -49,10 +99,21 @@
         </tbody>
     </table>
     {% else %}
-    <h2 class="ui header">استبيانتك السابقة
-        <div class="sub header">لا يوجد اي استبيانات حاليا</div>
+
+    <h2 class="ui header">اجتماعتك السابقة
+        <div class="sub header">لا يوجد اي اجتماعات حاليا</div>
     </h2>
     {% endif %}
 
 </div>
+      </body>
+ <script src="{% static 'js/jquery.min.js' %} "></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+<script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+<script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+<script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+<script src="{% static 'js/jquery.magnific-popup.js' %} "></script> <!-- Magnific Popup for lightboxes -->
+<script src="{% static 'js/validator.min.js' %} "></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+<script src="{% static 'js/scripts.js' %} "></script> <!-- Custom scripts -->
 {% endblock %}
+</html>

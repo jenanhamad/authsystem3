@@ -19,6 +19,8 @@ class SurveyForm(forms.ModelForm):
     q4option1 = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'فضلا ادخل الخيار الاول'}))
     q4option2 = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'فضلا ادخل الخيار الثاني'}))
 
+
+
     class Meta:
         model = Survey
         fields = ["title"]
@@ -46,7 +48,6 @@ class AnswerForm(forms.Form):
 
 
 class BaseAnswerFormSet(forms.BaseFormSet):
-    # note = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'فضلا ادخل الخيار الثاني'}))
 
     def get_form_kwargs(self, index):
         kwargs = super().get_form_kwargs(index)

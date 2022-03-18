@@ -16,20 +16,33 @@
    <tbody>
       <tr>
          <td>{{ survey.title }}</td>
-         {% for question in questions %}
-         {% for option in question.option_set.all %}
-         <td>
-            {{option.text}}
-         </td>
-         {% endfor %}
-         {% endfor %}
-         <td>
-            {% for submission in submissions %}
-         <td data-label="note">{{  submission.note }}</td>
-         </td>
-         {% endfor %}
-          <td>{{sub.voter}}</td>
-      </tr>
+{#         {% for question in questions %}#}
+{#         {% for option in question.option_set.all %}#}
+{#         <td>#}
+{#            {{option.text}}#}
+{#         </td>#}
+{#         {% endfor %}#}
+{#         {% endfor %}#}
+{#         <td>#}
+{#            {% for submission in submissions %}#}
+{#         <td data-label="note">{{  submission.note }}</td>#}
+{#         </td>#}
+{#         {% endfor %}#}
+{#          <td>{{sub.voter}}</td>#}
+{#      </tr>#}
+          {% for user in users %}
+              <tr>
+              <td>sss</td>
+              {% for anser in all.items %}
+                  <td>
+                  {{ anser }}
+                  </td>
+                  {% endfor %}
+              <td>
+                  {{ users }}
+              </td>
+              </tr>
+          {% endfor %}
    </tbody>
 </table>
 </div>

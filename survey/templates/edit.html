@@ -1,36 +1,61 @@
 {% extends "_base.html" %}
-{% block title %}Create - Surveys{% endblock %}
+{% load static %}
+
+{% block title %}انشاء اجتماع{% endblock %}
 
 {% block content %}
+        <html lang="en" dir="rtl">
+
+     <head>
+
+    <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+          <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+
+     </head>
+<body>
 <div class="ui center aligned basic very padded segment">
     <h1 class="ui header dividing">اضف الاسئلة الى {{survey.title}}</h1>
+      <thead class="center aligned">
+            <tr>
 
-    <div class="ui container left aligned">
+    <div class="ui container right aligned">
         {% for question in questions %}
         <div class="ui basic padded segment">
-            <h4 class="ui header">
+            <h4 >
       {{ question.prompt }}
             </h4>
             <ul>
                 {% for option in question.option_set.all %}
-                <li>
-                     {{option.text}}
-                </li>
+                    <br>
+                    {{option.text}}
+
                 {% endfor %}
             </ul>
         </div>
         {% endfor %}
-       
+
+
+
         {% if questions|length > 0 %}
         <div class="ui divider"></div>
         <form style="display: inline-block;" method="post">
             {% csrf_token %}
-            <button type="submit" class="ui primary button">تفعيل</button>
+            <button type="submit" class="btn-meet-lg">تفعيل</button>
         </form>
         <a href="{% url 'survey:survey-list' %}">
-            <div class="ui button">رجوع</div>
+            <div class="btn-meet-lg">رجوع</div>
         </a>
         {% endif %}
     </div>
 </div>
+    </body>
 {% endblock %}
+</html>

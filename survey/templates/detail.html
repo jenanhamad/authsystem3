@@ -1,28 +1,86 @@
 {% extends "_base.html" %}
-{% block title %}View - Surveys{% endblock %}
-
+{% block title %}عرض{% endblock %}
+{% load static %}
 {% block content %}
+
+<html lang="en" dir="rtl">
+  <head>
+
+    <!-- Styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
+          <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+
+
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+       <div class="container">
+          <!-- Image Logo -->
+          <a class="navbar-brand logo-image" href="{% url 'index' %}">
+          <img src= {% static 'images/logo.png' %} alt="alternative"></a>
+          <span class="nav-item">
+            <a class="btn-outline-sm" href="{% url 'logout' %}">سجل خروجك</a>
+          </span>
+       </div>
+       </div>
+       <!-- end of container -->
+    </nav>
+</head>
+<body>
+   <!-- Header -->
+    <header id="header" class="ex-2-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
     <div class="ui center aligned basic very padded segment">
         <h1 class="ui header">{{ survey.title }}</h1>
-        <h3 class="ui header">عدد المصوتين {{ num_submissions }} </h3>
-        <h3 class="ui header">رابط المشاركة: <a href="{{ public_url }}">{{ public_url }}</a></h3>
-        <h1 class="ui header dividing">النتائج</h1>
+        <h3 >عدد المصوتين {{ num_submissions }} </h3>
+        <h3 >رابط المشاركة: <a href="{{ public_url }}">{{ public_url }}</a></h3>
+        <h1>النتائج</h1>
         {% for question in questions %}
-            <div class="ui basic padded segment left aligned">
+            <div class="ui basic padded segment right aligned">
                 <h4 class="ui header">
                     {{ question.prompt }}
                 </h4>
                 <ul>
                     {% for option in question.option_set.all %}
-                        <li>
+                            <br>
                             {{ option.text }}: {{ option.percent|floatformat }}%
-                        </li>
+
                     {% endfor %}
                 </ul>
             </div>
+
         {% endfor %}
-
-
+        <a href="{% url 'survey:survey-list' %}">
+            <div class="btn-meet-lg">رجوع</div>
+        </a>
 
     </div>
+                    </div>
+    </div>
+            </div>
+    </header>
+  </body>
+    <script src="{% static 'js/jquery.min.js' %} "></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+<script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+<script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+<script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+<script src="{% static 'js/jquery.magnific-popup.js' %} "></script> <!-- Magnific Popup for lightboxes -->
+<script src="{% static 'js/validator.min.js' %} "></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+<script src="{% static 'js/scripts.js' %} "></script> <!-- Custom scripts -->
 {% endblock %}

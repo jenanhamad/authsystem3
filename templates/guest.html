@@ -14,6 +14,7 @@
     <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
     <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'css/btn.css' %}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap" rel="stylesheet">
@@ -41,15 +42,17 @@
        </div>
        <!-- end of container -->
     </nav>
-
+</head>
 <body>
   <header id="header" class="ex-2-header">
 
     <h1 class= "user_label" >  مرحبا {{ user.username }} !
     <br>
+        <br>
   لقد قمت بتسجيل دخولك كضيف </h1>
-
-<a href="{% url 'profile' %}">الصفجة الشخصيه</a>
+ <br>
+        <br>
+<a class="btn-meet-lg"  href="{% url 'profile' %}">الصفحة الشخصيه</a>
 </header>
 <script src="{% static 'js/jquery.min.js' %} "></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
 <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
