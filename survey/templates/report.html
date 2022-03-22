@@ -1,49 +1,103 @@
 {% extends "_base.html" %}
-{% block title %}report - Surveys{% endblock %}
+{% load static %}
+{% block title %}تقرير{% endblock %}
 {% block content %}
-<table class="ui celled table">
-   <thead>
-      <tr>
-         <th>الاجتماع</th>
-         <th> مكان الاجتماع </th>
-         <th> وقت الاجتماع </th>
-         <th>تاريخ الاجتماع  </th>
-         <th> ستحضر الاجتماع </th>
-          <th> الملاحظة</th>
-         <th>الضيف</th>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>{{ survey.title }}</td>
-{#         {% for question in questions %}#}
-{#         {% for option in question.option_set.all %}#}
-{#         <td>#}
-{#            {{option.text}}#}
-{#         </td>#}
-{#         {% endfor %}#}
-{#         {% endfor %}#}
-{#         <td>#}
-{#            {% for submission in submissions %}#}
-{#         <td data-label="note">{{  submission.note }}</td>#}
-{#         </td>#}
-{#         {% endfor %}#}
-{#          <td>{{sub.voter}}</td>#}
-{#      </tr>#}
-          {% for user in users %}
-              <tr>
-              <td>sss</td>
-              {% for anser in all.items %}
+<html lang="en" dir="rtl">
+   <head>
+      <!-- Styles -->
+      <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+      <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+      <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+      <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+      <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+      <style>
+         body h1, h2{
+         font-family: "Cairo", sans-serif;
+         color: rgb(95, 91, 91);
+         }
+      </style>
+      <!-- Preloader -->
+      <div class="spinner-wrapper">
+         <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+         </div>
+      </div>
+      <!-- end of preloader -->
+      <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+         <div class="container">
+            <!-- Image Logo -->
+            <a class="navbar-brand logo-image" href="{% url 'index' %}">
+            <img src= {% static 'images/logo.png' %} alt="alternative"></a>
+            <span class="nav-item">
+            <a class="btn-outline-sm" href="{% url 'logout' %}">سجل خروجك</a>
+            </span>
+         </div>
+         </div>
+         <!-- end of container -->
+      </nav>
+   </head>
+   <body>
+      <br>
+      <br>
+      <div class="ui center aligned basic very padded segment">
+         {% if users != None %}
+         <table class="ui celled table" style="width: 100%">
+            <thead class="center aligned">
+               <tr>
+                  <th>الاجتماع</th>
+                  <th> مكان الاجتماع </th>
+                  <th> وقت الاجتماع </th>
+                  <th>تاريخ الاجتماع  </th>
+                  <th> ستحضر الاجتماع </th>
+                  <th> الملاحظة</th>
+                  <th>الضيف</th>
+                  =
+               </tr>
+            </thead>
+            <tbody  class="center aligned">
+               <tr>
+                  {% for id_user,user in users.items %}
+               <tr>
+                  <td>{{ survey.title }}</td>
+                  {% for id_qus , anser in all.items %}
+                  {% if id_user == id_qus %}
+                  {% for ans in anser %}
                   <td>
-                  {{ anser }}
+                     {{ ans }}
                   </td>
                   {% endfor %}
-              <td>
-                  {{ users }}
-              </td>
-              </tr>
-          {% endfor %}
-   </tbody>
-</table>
-</div>
-{% endblock %}
+                  {% endif %}
+                  {% endfor %}
+                  {% for id_note , note in note.items %}
+                  {% if id_user == id_note %}
+                  <td>{{ note }}</td>
+                  {% endif %}
+                  {% endfor %}
+                  <td>{{ user }}</td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+         <a href="{% url 'survey:survey-list' %}" >
+            <div class="btn-meet-lg">رجوع</div>
+         </a>
+      </div>
+      {% else  %}
+      <h1 class="ui header" > لا يوجد اصوات الى الان !!! </h1>
+      {%  endif %}
+   </body>
+   <script src="{% static 'js/jquery.min.js' %} "></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+   <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+   <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+   <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+   <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+   <script src="{% static 'js/jquery.magnific-popup.js' %} "></script> <!-- Magnific Popup for lightboxes -->
+   <script src="{% static 'js/validator.min.js' %} "></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+   <script src="{% static 'js/scripts.js' %} "></script> <!-- Custom scripts -->
+   {% endblock %}
+</html>

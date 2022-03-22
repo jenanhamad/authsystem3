@@ -11,9 +11,12 @@ from .models import Option, Survey, Question, Answer, Submission
 from .forms import SurveyForm, OptionForm, AnswerForm, BaseAnswerFormSet,QuestionForm
 from django.db.models import Q
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 
-User = settings.AUTH_USER_MODEL
+User = get_user_model()
+
+# User = settings.AUTH_USER_MODEL
 def index(request):
     return render(request, 'list.html')
 @login_required
@@ -134,24 +137,32 @@ def report(request, pk):
     survey = Survey.objects.prefetch_related("question_set__option_set").get(pk=pk)
     sub = survey.submission_set.filter(survey=pk)
     all = {}
-    users = []
+    users = {}
+    note = {}
     if sub.values('voter').distinct().count() > 1:
         for i in range(0, sub.values('voter').distinct().count()):
             for d in sub.filter(Q(voter=list(sub.values('voter').distinct())[i]['voter'])):
+                note[list(sub.values('voter').distinct())[i]['voter']] = d.note
                 for get in Answer.objects.filter(submission=d):
                     for am in Option.objects.filter(id=get.option_id):
-                        all[am.question_id] = str(am.text)
-            users.append(User.objects.get(id=list(sub.values('voter').distinct())[i]['voter']))
+                        if all.get(list(sub.values('voter').distinct())[i]['voter']) != None:
+                            all[list(sub.values('voter').distinct())[i]['voter']] += [am.text]
+                        else:
+                            all[list(sub.values('voter').distinct())[i]['voter']] = [am.text]
+            users[list(sub.values('voter').distinct())[i]['voter']] = User.objects.get(id=list(sub.values('voter').distinct())[i]['voter'])
     elif sub.values('voter').distinct().count() == 0:
         users = None
     else:
         for d in sub.filter(Q(voter=list(sub.values('voter').distinct())[0]['voter'])):
             for get in Answer.objects.filter(submission=d):
                 for am in Option.objects.filter(id=get.option_id):
-                    all[am.question_id] = str(am.text)
-        users.append(User.objects.get(id=list(sub.values('voter').distinct())[0]['voter']))
+                    if all.get(list(sub.values('voter').distinct())[0]['voter']) != None:
+                        all[list(sub.values('voter').distinct())[0]['voter']] += [am.text]
+                    else:
+                        all[list(sub.values('voter').distinct())[0]['voter']] = [am.text]
+        users[list(sub.values('voter').distinct())[0]['voter']] = User.objects.get(id=list(sub.values('voter').distinct())[0]['voter'])
 
-    return render(request, "report.html", {"all": all, "users": users},)
+    return render(request, "report.html", {"all": all, "users": users, "survey":survey,"note":note},)
 
 @login_required
 @allowed_users(allowed_roles=['host'])

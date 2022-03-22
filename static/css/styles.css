@@ -11,25 +11,19 @@ html {
 
 body, p {
 	color: #555;
-
-	
-
+	font-family: 'Cairo', sans-serif;
 }
-
-.p-large {
-}
-
-.p-small {
-}
-
 h1 {
 	color: rgb(95, 91, 91);
 	letter-spacing: -0.2px;
-}
+	font-family: 'Cairo', sans-serif;
 
+
+}
 h2 {
 	color: rgb(95, 91, 91);
 	letter-spacing: -0.2px;
+
 }
 
 h3 {
